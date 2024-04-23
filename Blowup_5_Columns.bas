@@ -1,0 +1,74 @@
+Attribute VB_Name = "Blowup_5_Columns"
+Sub Blowup_5_Columns()
+
+    ActiveWindow.DisplayGridlines = False
+
+    Dim c1() As Variant
+    Dim c2() As Variant
+    Dim c3() As Variant
+    Dim c4() As Variant
+    Dim c5() As Variant
+    Dim out() As Variant
+    Dim j As Long, k As Long, l As Long, m As Long, n As Long, o As Long
+
+
+    Dim col1 As Range
+    Dim col2 As Range
+    Dim col3 As Range
+    Dim col4 As Range
+    Dim col5 As Range
+    Dim out1 As Range
+
+
+    Set col1 = Range("A1", Range("A1").End(xlDown))
+    Set col2 = Range("B1", Range("B1").End(xlDown))
+    Set col3 = Range("C1", Range("C1").End(xlDown))
+    Set col4 = Range("D1", Range("D1").End(xlDown))
+    Set col5 = Range("E1", Range("E1").End(xlDown))
+
+    c1 = col1
+    c2 = col2
+    c3 = col3
+    c4 = col4
+    c5 = col5
+
+    Set out1 = Range("G2", Range("K2").Offset(UBound(c1) * UBound(c2) * UBound(c3) * UBound(c4) * UBound(c5)))
+    out = out1
+
+    j = 1
+    k = 1
+    l = 1
+    m = 1
+    n = 1
+    o = 1
+
+    Do While j <= UBound(c1)
+        Do While k <= UBound(c2)
+            Do While l <= UBound(c3)
+                Do While m <= UBound(c4)
+                    Do While n <= UBound(c5) ' This now loops correctly
+                        out(o, 1) = c1(j, 1)
+                        out(o, 2) = c2(k, 1)
+                        out(o, 3) = c3(l, 1)
+                        out(o, 4) = c4(m, 1)
+                        out(o, 5) = c5(n, 1)
+                        o = o + 1
+                        n = n + 1
+                    Loop
+                    n = 1
+                    m = m + 1
+                Loop
+                m = 1
+                l = l + 1
+            Loop
+            l = 1
+            k = k + 1
+        Loop
+        k = 1
+        j = j + 1
+    Loop
+
+
+    out1.Value = out
+End Sub
+
